@@ -1,0 +1,161 @@
+/* Add maven for code font (keep other xaringan defaults */
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+                            
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import url('https://fonts.googleapis.com/css?family=Raleway:500,700&display=swap');
+
+.titleslide-title {
+  font-family: 'Source Sans Pro', sans-serif; /*comments */
+  font-weight: 475;
+  font-size: 240%;
+}
+
+h1 {
+  font-family: 'Source Sans Pro', sans-serif; /*comments */
+  font-weight: 475;
+}
+
+h2, h3, h4 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 110%;
+  font-weight: 400;
+}
+
+body, p {
+  font-family: 'Raleway', serif;
+  font-size: 140%;
+}
+
+li { font-size: 150%; margin: 0.5em 0; }
+li li { font-size: 80% }
+li li li { font-size: 90% }
+li li li li { font-size: 100% }
+li li li li li { font-size: 100% }
+
+
+.remark-inline-code{
+  font-family: 'Inconsolata', monospace; 
+  background: #F5F5F5; /* lighter */
+  /* background: #e7e8e2; /* darker */
+  border-radius: 3px;
+  padding: 4px;
+}
+
+
+/* */
+  
+.title-slide {
+  background-color: #1C1D19;
+  color: #d6d6d6;
+  text-shadow: 0 0 20px #333;
+  text-align: center
+}
+  
+.title-slide h1, h2, h3, h4 {
+  margin-bottom: 0.1em;
+  line-height: 0.4em;
+  }
+  
+.title-slide a {
+  color: #d6d6d6;
+  }
+
+.title-slide .remark-slide-number {
+  display: none;
+}
+
+.title-font {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.font120 {
+  font-size: 120%;
+}
+
+.red {
+  color: #DF0007;
+}
+
+img {
+  position: relative;
+  z-index: 100;
+}
+
+.img-top {
+  position: absolute;
+  margin-top: -150px;
+  margin-right: -50px;
+  height: 90%;
+}
+
+remark.macros.scale = function (percentage) {
+  var url = this;
+  return '<img src="' + url + '" style="width: ' + percentage + '" />';
+};
+
+.centre {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+  padding: 10px;
+}
+
+.large { font-size: 130% }
+.small { font-size: 70% }
+
+
+table {
+  margin: auto;
+  border-top: 1px solid #666;
+  border-bottom: 1px solid #666;
+}
+
+table thead th { border-bottom: 1px solid #ddd; }
+  th, td { padding: 5px; }
+  tr:nth-child(even) { background: #eee }
+
+
+a {
+  color: #e60000;
+}
+
+fade {
+  color: #D3D3D3;
+}
+
+div.my-footer {
+    background-color: #272822;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 20px;
+    width: 100%;
+}
+div.my-footer span {
+    font-size: 8pt;
+    color: #F7F8FA;
+    position: absolute;
+    right: 30px;
+    bottom: 4px;
+}
+
+.pull-left {
+  float: left;
+  width: 60%;
+}
+
+.pull-right {
+  float: right;
+  width: 40%;
+}
+
+.pull-left50 {
+  float: left;
+  width: 50%;
+}
+
+.pull-right50 {
+  float: right;
+  width: 50%;
+}

@@ -1,0 +1,340 @@
+---
+output:
+  xaringan::moon_reader:
+    seal: true
+    lib_dir: libs
+    css: ["default", "my-theme.css", "animate.css"]
+    nature:
+      highlightStyle: github
+      beforeInit: "https://platform.twitter.com/widgets.js"
+      highlightLines: true
+      highlightSpans: false
+      ratio: 16:9
+      countIncrementalSlides: true
+      slideNumberFormat: "%current%/%total%"
+---
+
+name: title_slide
+class: middle, title-slide, animated, fadeIn, faster
+
+<div class="my-footer"></div>
+
+.titleslide-title[(Data Cleaning + Fuzzy Matching) in R]
+
+<br>
+### .title-font[Data Cleaning Brown Bag]
+####.title-font[Faculty of Information (iSchool) at University of Toronto]
+
+<br>
+### <b> .title-font[Eugene Joh] </b>
+.title-font[*February 28 2020*]
+<br>
+
+<!-- <h4><i class="fab fa-github fa-lg">&nbsp;</i> <i class="fab fa-twitter fa-lg"></i> .title-font[[&nbsp;@eugejoh](https://twitter.com/eugejoh)] -->
+
+<div class = "my-footer"><span>Disclaimer: views and opinions expressed here are my own and do not represent my employer</div>
+
+
+???
+
+---
+name: intro
+class: animated, fadeIn, faster
+
+.pull-left[  
+# Outline
+
+  - Challenges with global health datasets
+  - Geocoding locations in India using R  
+    - Cleaning messy text  
+    - Fuzzy matching  
+    - Iteration  
+  - Lessons learned  
+]
+
+.pull-right[
+<br>
+```{r echo=FALSE, out.width = "120", fig.align='center'}
+knitr::include_graphics("https://cdn.onlinewebfonts.com/svg/img_385487.png")
+```
+<br>
+```{r echo=FALSE, out.width = "150px", fig.align='center'}
+knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/R_logo.svg/724px-R_logo.svg.png")
+```
+<br>
+```{r echo=FALSE, out.width = "200px", fig.align='center', }
+knitr::include_graphics("https://www.traillink.com/images/tl/custom-icons/new-map-icon.svg")
+```
+]
+
+???
+Today I’ll be talking about some challenges that I’ve come to identify with commonly used global health datasets, then I’ll provide a walkthrough or case study on a project I was involved with this past summer where we had to geocode villages and towns in India. I’ll demonstrate about how I used R to tackle this project, breaking it down into 3 sections – I’ll be showing some code and examples of the steps involved.
+And then I’ll finish with a couple lessons learned and takeways from this project, that I hope will be useful or at least interesting for those here today.
+
+
+---
+name: tweet
+class: animated, fadeIn, faster
+
+<center>
+<blockquote class="twitter-tweet" width="300" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/causalinf/status/1230146663207096320">19, February 2020</a></blockquote>
+</center>
+
+???
+Before I jump into it, I wanted to share this tweet I found hilarious and a bit sad – there’s a paper reporting that 20% of all genomic data out there has errors attributed to the feature Excel has that auto-converts strings into a date format, essentially changing the content of that cell.
+
+I think this highlights the importance of data cleaning, and just an understanding that certain software we use regularly can throw in wrenches into the systems and workflows we have with data. I think events like this, that provide the space to share challenges and ideas like this brown bag are really great.
+
+---
+name: globalhealthtitle
+class: title-slide, middle, animated, fadeIn, faster
+
+# Challenges with Cleaning Global Health Data
+
+???
+
+---
+name: ghdata
+class: animated, fadeIn, faster
+
+# Global Health
+
+*"improving the health of populations at the international level"*
+
+.pull-left[
+  - Vital statistics  
+    - Births, deaths, population composition  
+- Health surveys  
+    - Sample-based
+    - Household-level information
+    - E.g. malaria, HIV, maternal & child health, malnutrition, etc.
+]
+
+.pull-right[
+```{r echo=FALSE, out.width=350}
+knitr::include_graphics("https://2oqz471sa19h3vbwa53m33yj-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/681viwphrfnz-1.gif")
+```
+]
+
+
+???
+So just at a high-level global health is the study of population health, at the global or international level. A lot of this work is focused in lower-middle income countries, countries with less resources and infrastructure we take for granted in countries like here in Canada.
+
+A lot of the data generated and used in the area of global health is related to activity of governments and international organizations (like the WHO, USAID) – they are usually built on existing census programs that capture information like birth rates, mortality, sex ratios, etc.
+
+These surveys are usually sample-based or based on a sample design, they typically capture information down to the household-level, and focus on specific causes of disease burden, overall-health, and vulnerable groups
+
+
+---
+name: commonchallenges
+class: animated, fadeIn, faster
+
+
+# Common Data Challenges
+
+.pull-left50[
+
+- Data collection -> entry errors  
+- Missing/incomplete data  
+- Lack of Metadata
+- Ambiguity due to...
+  - Alternative spelling 
+  - Multiple languages
+  ]
+--
+
+.pull-right50[
+
+
+```{r collapse=FALSE, eval=FALSE}
+# I know what this means
+"doughnut"
+"donut"
+
+# Hmmm .. Google please help me
+"Gothra" #a village?
+"Gotra"  #a clan or lineage? maybe a village?
+
+"Kaipukharia" #a village
+"Kaipukuria"  #also a village, k
+"Kaipukhuria" #and also a village..?
+```
+
+]
+
+???
+
+data collection, especially when using paper forms is problematic with data entry. also speaks to the training of those writing down names, 
+
+---
+name: geocodingtitle
+class: title-slide, middle, animated, fadeIn, faster
+
+# 
+
+???
+
+---
+name: projectdescr
+class: animated, fadeIn, faster
+
+# Geocoding by Linking Datasets
+**Objective**
+ - Assign latitude/longitude to survey sampling units
+
+**Data Sources**
+ - Master list of sampling units
+ - Village and town amenities
+ - Pin code locations
+ - Shapefiles of administrative divisions
+
+
+???
+
+---
+name: probs
+class: animated, fadeIn, faster
+
+# Problem(s)
+
+Join on village/town name
+ - Messy and inconsistent text
+ - Alternative spelling of village/town names
+ - Duplicated records
+   - Multiple sampling units  single location name
+   - Single location name  multiple lat/lon
+
+**No foreign key for consistent joins**
+
+
+---
+name: precedent
+class: animated, fadeIn, faster
+
+.pull-left[
+
+# What Precedent Existed?
+
+**SQL queries:**
+ - Standardize text (e.g. letter case)
+ - Basic text cleaning (e.g. removing spaces)
+ - Join datasets on “cleaned” village/town names
+ - Nearest-distance measurements
+
+]
+
+.pull-right[
+<br>
+```{r echo=FALSE, out.width=250, fig.align='center'}
+knitr::include_graphics("https://wiki.postgresql.org/images/thumb/a/a4/PostgreSQL_logo.3colors.svg/540px-PostgreSQL_logo.3colors.svg.png")
+```
+<br>
+```{r echo=FALSE, out.width=200, fig.align='center'}
+knitr::include_graphics("https://www.osgeo.org/wp-content/uploads/postgis-logo-171x250.png")
+```
+
+]
+
+---
+name: rtoolkit
+class: animated, fadeIn, faster
+
+.pull-left[
+# Toolkit in R
+
+ - Cleaning, Processing, and Joins
+    - `dplyr`
+    - `stringr`
+    - `purrr`
+ - Fuzzy Matching
+    - `stringdist`
+ - Database Connections
+    - `DBI`
+    - `RPostgres`
+    - `dbplyr`
+
+]
+
+.pull-right[
+
+```{r echo=FALSE, out.width=140, fig.align='center'}
+knitr::include_graphics("img/dplyr.svg")
+knitr::include_graphics("img/stringr.svg")
+knitr::include_graphics("img/purrr.svg")
+```
+
+]
+
+???
+
+
+---
+name: cleantext
+class: animated, fadeIn, faster
+
+# Cleaning Text
+
+Dplyr, stringr
+Targeted cleaning of data frames
+Case standardization
+Remove white space
+Remove symbols
+Regular expression
+
+
+---
+name: fuzzmatch
+class: animated, fadeIn, faster
+
+# Fuzzy Matching
+What is it? What is string distance?
+Example of stringdist in R
+Joining on variables
+
+
+---
+name: purrr
+class: animated, fadeIn, faster
+
+# Iteration
+
+Purrr
+Iterate across “blocks” 
+multiple matches, administrative boundaries,
+
+
+---
+name: useexist
+class: animated, fadeIn, faster
+
+# Leverage Existing Solutions
+DBI, dbplyr, RPostgres
+Run SQL scripts for nearest-distance measurement
+Destination of tables were in PostgreSQL
+
+---
+name: results
+class: animated, fadeIn, faster
+
+# Results
+Just cleaning strings increased overall match rate by
+Fuzzy matching improved overall match rate by … and reduced manual review by …
+Iterating SQL scripts increased efficiency and reproducibility
+Reduced leftover manual matching
+
+---
+name: takeaway
+class: animated, fadeIn, faster
+
+# Lessons Learned
+
+Identify the problems
+Identify the potential tools
+Leverage existing solutions
+Understand
+
+
+---
+name: lastslide
+
+thanks
