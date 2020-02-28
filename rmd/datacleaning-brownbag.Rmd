@@ -14,6 +14,7 @@ output:
       slideNumberFormat: "%current%/%total%"
 ---
 
+
 name: title_slide
 class: middle, title-slide, animated, fadeIn, faster
 
@@ -45,7 +46,7 @@ class: animated, fadeIn, faster
 # Outline
 
   - Challenges with global health datasets
-  - Geocoding locations in India using R  
+  - Geocoding locations using R  
     - Cleaning messy text  
     - Fuzzy matching  
     - Iteration  
@@ -102,12 +103,11 @@ class: animated, fadeIn, faster
 *"improving the health of populations at the international level"*
 
 .pull-left[
-  - Vital statistics  
-    - Births, deaths, population composition  
-- Health surveys  
-    - Sample-based
-    - Household-level information
-    - E.g. malaria, HIV, maternal & child health, malnutrition, etc.
+**Health Surveys**  
+ - Sample-based
+ - Nested in vital statistics  
+ - Household-level information
+ - E.g. malaria, HIV, maternal & child health, malnutrition, etc.
 ]
 
 .pull-right[
@@ -136,22 +136,20 @@ class: animated, fadeIn, faster
 
 - Data collection -> entry errors  
 - Missing/incomplete data  
-- Lack of Metadata
 - Ambiguity due to...
-  - Alternative spelling 
+  - Alternative/inconsistent spelling 
   - Multiple languages
   ]
 --
 
 .pull-right50[
 
-
 ```{r collapse=FALSE, eval=FALSE}
 # I know what this means
 "doughnut"
 "donut"
 
-# Hmmm .. Google please help me
+# Hmmm... Google please help me
 "Gothra" #a village?
 "Gotra"  #a clan or lineage? maybe a village?
 
@@ -164,13 +162,13 @@ class: animated, fadeIn, faster
 
 ???
 
-data collection, especially when using paper forms is problematic with data entry. also speaks to the training of those writing down names, 
+data collection, especially when using paper forms is problematic with data entry. also speaks to the training of those writing down names, transcribing the written text into a computer, there so much room for error
 
 ---
 name: geocodingtitle
 class: title-slide, middle, animated, fadeIn, faster
 
-# 
+# Geocoding Locations using R
 
 ???
 
@@ -178,62 +176,212 @@ class: title-slide, middle, animated, fadeIn, faster
 name: projectdescr
 class: animated, fadeIn, faster
 
-# Geocoding by Linking Datasets
+# Project Description
 **Objective**
  - Assign latitude/longitude to survey sampling units
 
 **Data Sources**
- - Master list of sampling units
- - Village and town amenities
- - Pin code locations
- - Shapefiles of administrative divisions
-
+ - Sampling units master list
+ - Village amenities
+ - Town amenities
 
 ???
+
+---
+name: pic1
+class: animated, fadeIn, faster
+<br>
+```{r echo=FALSE}
+DiagrammeR::grViz('digraph {
+graph [rankdir = LR]
+node [shape = rectangle, fontsize = "22", style = filled, fillcolor = Linen, fontname = "Arial", shape = "tab" fontcolor = "gray10"]
+
+   sample [ label=<
+     <table border="0" cellborder="0" cellspacing="1">
+       <tr><td align="left"><b>Sampling Units         </b></td></tr>
+       <tr><td align="left"><font point-size="15"> n = 9,000</font></td></tr>
+       <tr><td align="left"><font point-size="15"> - Sampling Unit ID</font></td></tr>
+       <tr><td align="left"><font point-size="15"><b> - Village Names</b></font></td></tr>
+       <tr><td align="left"><font point-size="15"><b> - Town Names</b></font></td></tr>
+<tr><td align="left"> </td></tr>
+<tr><td align="left"> </td></tr>
+<tr><td align="left"> </td></tr>
+<tr><td align="left"> </td></tr>
+<tr><td align="left"> </td></tr>
+<tr><td align="left"> </td></tr>
+     </table>>]
+
+   vill [ label=<
+     <table border="0" cellborder="0" cellspacing="1">
+       <tr><td align="left"><b>Village Amenities         </b></td></tr>
+       <tr><td align="left"><font point-size="15"> n = 640,000</font></td></tr>
+       <tr><td align="left"><font point-size="15"><b> - Village Names</b></font></td></tr>
+       <tr><td align="left"><font point-size="15" color = "black"> - Latitude and Longitude</font></td></tr>
+       <tr><td align="left"> </td></tr>
+     </table>>, shape = cylinder, fillcolor = lightsteelblue1]
+
+   twn [ label=<
+     <table border="0" cellborder="0" cellspacing="1">
+       <tr><td align="left"><b>Town Amenities         </b></td></tr>
+       <tr><td align="left"><font point-size="15"> n = 8,000</font></td></tr>
+       <tr><td align="left"><font point-size="15"><b> - Town Names</b></font></td></tr>
+       <tr><td align="left"><font point-size="15" color = "black"> - Latitude and Longitude</font></td></tr>
+       <tr><td align="left"> </td></tr>
+     </table>>, shape = cylinder, fillcolor = lightsteelblue1]
+
+sample -> {vill twn} [arrowhead=none]
+
+}', width = 650, height = 500)
+```
+
+---
+name: pic2
+class: animated, fadeIn, faster
+```{r echo=FALSE}
+DiagrammeR::grViz('digraph {
+graph [rankdir = LR]
+node [shape = rectangle, fontsize = "22", style = filled, fillcolor = Linen, fontname = "Arial", shape = "tab" fontcolor = "gray10"]
+
+  # survey [ label=<
+  #  <table border="0" cellborder="0" cellspacing="1">
+  #    <tr><td align="left"><b>Survey Forms         </b></td></tr>
+  #    <tr><td align="left"><font point-size="15"><b> - Sampling Unit ID</b></font></td></tr>
+  #    <tr><td align="left"><font point-size="15"> - Household Information</font></td></tr>
+  #    <tr><td align="left"><font point-size="15"> - Village Names</font></td></tr>
+  #    <tr><td align="left"><font point-size="15"> - Town Names</font></td></tr>
+  #    <tr><td align="left"> </td></tr>
+  #    <tr><td align="left"> </td></tr>
+  # </table>>]
+
+   sample [ label=<
+     <table border="0" cellborder="0" cellspacing="1">
+       <tr><td align="left"><b>Sampling Units         </b></td></tr>
+       <tr><td align="left"><font point-size="15"><b> - Sampling Unit ID</b></font></td></tr>
+       <tr><td align="left"><font point-size="15"> - Village Names</font></td></tr>
+       <tr><td align="left"><font point-size="15"> - Town Names</font></td></tr>
+<tr><td align="left"> </td></tr>
+<tr><td align="left"> </td></tr>
+<tr><td align="left"> </td></tr>
+<tr><td align="left"> </td></tr>
+<tr><td align="left"> </td></tr>
+<tr><td align="left"> </td></tr>
+     </table>>]
+
+   vill [ label=<
+     <table border="0" cellborder="0" cellspacing="1">
+       <tr><td align="left"><b>Village Amenities         </b></td></tr>
+<tr><td align="left"><font point-size="15"> n = 640,000</font></td></tr>
+       <tr><td align="left"><font point-size="15"> - Village Names</font></td></tr>
+       <tr><td align="left"><font point-size="15" color = "black"><b> - Latitude and Longitude</b></font></td></tr>
+       <tr><td align="left"> </td></tr>
+     </table>>, shape = cylinder, fillcolor = lightsteelblue1]
+
+   twn [ label=<
+     <table border="0" cellborder="0" cellspacing="1">
+       <tr><td align="left"><b>Town Amenities         </b></td></tr>
+<tr><td align="left"><font point-size="15"> n = 8,000</font></td></tr>
+       <tr><td align="left"><font point-size="15"> - Town Names</font></td></tr>
+       <tr><td align="left"><font point-size="15" color = "black"><b> - Latitude and Longitude</b></font></td></tr>
+       <tr><td align="left"> </td></tr>
+     </table>>, shape = cylinder, fillcolor = lightsteelblue1]
+
+   out [ label=<
+     <table border="0" cellborder="0" cellspacing="1">
+       <tr><td align="left"><b>Desired Output         </b></td></tr>
+<tr><td align="left"><font point-size="15"> n = ??? </font></td></tr>
+       <tr><td align="left"><font point-size="15"> - <b>Sampling Unit ID</b></font></td></tr>
+       <tr><td align="left"><font point-size="15" color = "black"> - <b>Latitude and Longitude</b></font></td></tr>
+       <tr><td align="left"> </td></tr>
+     </table>>, shape = cylinder, fillcolor = skyblue2]
+
+# survey -> sample 
+sample -> {vill twn} [arrowhead=none]
+{sample vill twn} -> out
+}', width = 1000, height = 500)
+```
+
+???
+villages - 640948
+towns - 7948
+
 
 ---
 name: probs
 class: animated, fadeIn, faster
 
+.pull-left[
 # Problem(s)
 
-Join on village/town name
- - Messy and inconsistent text
- - Alternative spelling of village/town names
- - Duplicated records
-   - Multiple sampling units  single location name
-   - Single location name  multiple lat/lon
+**No foreign key for consistent joins...**
 
-**No foreign key for consistent joins**
+Village/town name variable  
+ - Messy text (case, symbols, spaces)
+ - Alternative spelling
+ - True value vs. data entry error
+]
 
+--
+
+.pull-right[
+
+<br>
+<br>
+```{r eval=FALSE}
+# how do I join on this?
+"Basaimeo(149)"
+"1 Ffb"
+"Hoogrijan T.E.116/64 & 66 Nlr"
+"Lingzey (Assam)$"
+"(5 K.M. dairy Mill Tinkengsung)"
+" Panipat (M Cl + OG)"
+"12 Miles It Road"
+"Wagon Pathar IV (Maanbasti )"
+"Vadiyavalasa @ Vaddevalasa"
+"MEGHANA"
+"(Maithong II/(Namphai II)"
+  
+# maybe the same location?
+"Kanakpur Pt. II (CT)"
+" Kanakpur Pt Ii"
+"Kanakpur Ii"
+
+# is this entry error?
+"Baniakuri"
+"Banjakuri"
+```
+
+]
+
+???
+so we were left with joining these data sources together by village and town name (we did not have a foreign key like a village or town code we could use)
+Compounding this problem, was that issues I described earlier were very prevalent in these location name columns/variables
 
 ---
 name: precedent
 class: animated, fadeIn, faster
-
-.pull-left[
+exclude: true
 
 # What Precedent Existed?
 
-**SQL queries:**
- - Standardize text (e.g. letter case)
- - Basic text cleaning (e.g. removing spaces)
- - Join datasets on “cleaned” village/town names
- - Nearest-distance measurements
+.pull-left[
+
+**SQL Queries**
+ - Standardize names (letter case)
+ - Basic text cleaning (removing spaces)
+ - Joins on "cleaned" variable
+ - Nearest-Neighbour search
 
 ]
 
 .pull-right[
 <br>
-```{r echo=FALSE, out.width=250, fig.align='center'}
+```{r echo=FALSE, out.width=220, fig.align='center'}
 knitr::include_graphics("https://wiki.postgresql.org/images/thumb/a/a4/PostgreSQL_logo.3colors.svg/540px-PostgreSQL_logo.3colors.svg.png")
-```
-<br>
-```{r echo=FALSE, out.width=200, fig.align='center'}
-knitr::include_graphics("https://www.osgeo.org/wp-content/uploads/postgis-logo-171x250.png")
 ```
 
 ]
+
+???
 
 ---
 name: rtoolkit
@@ -256,11 +404,11 @@ class: animated, fadeIn, faster
 ]
 
 .pull-right[
-
+<br>
 ```{r echo=FALSE, out.width=140, fig.align='center'}
-knitr::include_graphics("img/dplyr.svg")
-knitr::include_graphics("img/stringr.svg")
-knitr::include_graphics("img/purrr.svg")
+knitr::include_graphics("img/dplyr.svg")   
+knitr::include_graphics("img/stringr.svg")  
+knitr::include_graphics("img/purrr.svg")  
 ```
 
 ]
@@ -273,24 +421,192 @@ name: cleantext
 class: animated, fadeIn, faster
 
 # Cleaning Text
+```{r include=FALSE}
+library(tidyverse)
+library(stringdist)
+my_data <- tibble::tibble(
+  vilname = c(
+    "Basaimeo(149)",
+    "Hoogrijan T.E.116/64 & 66 Nlr",
+    "(5 K.M. dairy Mill Tinkengsung)",
+    "Wagon Pathar IV (Maanbasti )",
+    "Vadiyavalasa @ Vaddevalasa",
+    " MEGHANA"
+  )
+) %>% mutate(id = paste0(0, row_number())) %>% select(id, vilname)
+my_data_original <- my_data
+```
+.pull-left[
+Village and Town Names
 
-Dplyr, stringr
-Targeted cleaning of data frames
-Case standardization
-Remove white space
-Remove symbols
-Regular expression
+ - Remove punctuation
+ - Trim white space (leading and trailing)
+ - Remove extra spaces
+ - Convert to lowercase
+
+]
+
+.pull-right[
+
+```{r}
+my_data # a sample of village names
+```
+
+]
 
 
 ---
-name: fuzzmatch
+name: rmpunct
+
+# Remove Punctuation
+
+.s80[`stringr::str_replace_all()` replaces all matches]
+
+```{r}
+my_data$vilname <- str_replace_all(my_data$vilname, "[[:punct:]]+", "")
+```
+--
+```{r echo=FALSE}
+my_data
+```
+
+
+???
+
+
+---
+name: rmextraspaces 
+
+# Remove White Space
+
+.s80[`stringr::str_trim()` to trim white space]  
+.s80[`stringr::str_replace_all()` replaces many spaces with just one]
+
+```{r}
+my_data$vilname <- str_trim(my_data$vilname, "both")
+my_data$vilname <- str_replace_all(my_data$vilname, "[[:space:]]+", " ")
+```
+--
+```{r echo=FALSE}
+my_data
+```
+
+???
+str_replace_all(my_data$vilname, "[[:space:]]+", " ") doesnt remove leading spaces
+
+---
+name: tolower
+
+# Convert to Lower Case
+
+.s80[`tolower()` to convert everything to lower-case]
+```{r}
+my_data$vilname <- tolower(my_data$vilname)
+```
+--
+.pull-left50[
+```{r}
+my_data_original #original
+```
+]
+
+.pull-right50[
+```{r}
+my_data #cleaned-ish!
+```
+
+]
+
+???
+
+---
+name: fncver
+
+# Make a Function
+
+Put all the steps in a function, then clean all `character` type columns
+
+.pull-left50[
+```{r}
+my_cleaner <- function(x) {
+  x %>% 
+    str_replace_all("[[:punct:]]+", "") %>% 
+    str_trim(side = "both") %>% 
+    str_replace_all("\\s+", " ") %>% 
+    tolower()
+}
+```
+]
+
+.pull-right50[
+
+```{r}
+my_data %>% 
+  mutate_if(is.character, my_cleaner)
+```
+
+]
+
+
+???
+
+---
+name: titlestringdist
+class: title-slide, middle, animated, fadeIn, faster
+
+## ...but can we really use this 'cleaned' variable?
+
+???
+
+---
+name: stringdistance
 class: animated, fadeIn, faster
 
 # Fuzzy Matching
-What is it? What is string distance?
-Example of stringdist in R
-Joining on variables
 
+ - Finding an approximate match
+ - String Distance
+   - a metric that measures the similarity/difference between two strings
+   - `stringdist` R package 
+
+
+```{r}
+
+stringdist::stringdist("donut", "doughnut", method = "osa")
+
+```
+
+
+```{r include=FALSE}
+x1 <- c("Kanakpur Pt. II (CT)", " Kanakpur Pt Ii", "Kanakpur Ii")
+x1clean <- tolower(str_replace_all(str_trim(
+str_remove_all(gsub("[[:punct:]]", "", x1),
+"[-|=|\\+]"), side = "both"
+), "\\s+", " "))
+x2 <- c("kanakpur")
+
+df <- tibble(
+  x1, x1clean, x2
+)
+```
+
+```{r include=FALSE}
+df
+
+mutate_stringdist <- function(x, a, b, method, rev = FALSE) {
+  var_name <- paste(method, enexpr(a), enexpr(b), sep = "_")
+  mutate(x, !!var_name := stringdist(a, b, method = method))
+}
+
+df %>%
+  mutate_stringdist(x1, x2, method = "jw") %>% 
+  mutate_stringdist(x1clean, x2, method = "jw") %>% 
+  arrange_at(vars(matches("jw")))
+
+```
+
+---
+name: fuzzymatch
 
 ---
 name: purrr
@@ -311,6 +627,10 @@ class: animated, fadeIn, faster
 DBI, dbplyr, RPostgres
 Run SQL scripts for nearest-distance measurement
 Destination of tables were in PostgreSQL
+
+```{r echo=FALSE, out.width=200, fig.align='center', eval=FALSE}
+knitr::include_graphics("https://www.osgeo.org/wp-content/uploads/postgis-logo-171x250.png")
+```
 
 ---
 name: results
