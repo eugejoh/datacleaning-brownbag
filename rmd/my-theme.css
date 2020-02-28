@@ -104,7 +104,7 @@ remark.macros.scale = function (percentage) {
 .large { font-size: 130% }
 .small { font-size: 70% }
 .s80 { font-size: 80%}
-
+.tiny { font-size: 50%;}
 
 table {
   margin: auto;

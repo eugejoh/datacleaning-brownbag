@@ -8,7 +8,7 @@ output:
       highlightStyle: github
       beforeInit: "https://platform.twitter.com/widgets.js"
       highlightLines: true
-      highlightSpans: false
+      highlightSpans: true
       ratio: 16:9
       countIncrementalSlides: true
       slideNumberFormat: "%current%/%total%"
@@ -50,20 +50,20 @@ class: animated, fadeIn, faster
     - Cleaning messy text  
     - Fuzzy matching  
     - Iteration  
-  - Lessons learned  
+  - Takeaways
 ]
 
 .pull-right[
 <br>
-```{r echo=FALSE, out.width = "120", fig.align='center'}
+```{r echo=FALSE, out.width = "100", fig.align='center'}
 knitr::include_graphics("https://cdn.onlinewebfonts.com/svg/img_385487.png")
 ```
 <br>
-```{r echo=FALSE, out.width = "150px", fig.align='center'}
+```{r echo=FALSE, out.width = "120px", fig.align='center'}
 knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/R_logo.svg/724px-R_logo.svg.png")
 ```
 <br>
-```{r echo=FALSE, out.width = "200px", fig.align='center', }
+```{r echo=FALSE, out.width = "170px", fig.align='center', }
 knitr::include_graphics("https://www.traillink.com/images/tl/custom-icons/new-map-icon.svg")
 ```
 ]
@@ -82,9 +82,6 @@ class: animated, fadeIn, faster
 </center>
 
 ???
-Before I jump into it, I wanted to share this tweet I found hilarious and a bit sad – there’s a paper reporting that 20% of all genomic data out there has errors attributed to the feature Excel has that auto-converts strings into a date format, essentially changing the content of that cell.
-
-I think this highlights the importance of data cleaning, and just an understanding that certain software we use regularly can throw in wrenches into the systems and workflows we have with data. I think events like this, that provide the space to share challenges and ideas like this brown bag are really great.
 
 ---
 name: globalhealthtitle
@@ -203,6 +200,7 @@ node [shape = rectangle, fontsize = "22", style = filled, fillcolor = Linen, fon
        <tr><td align="left"><font point-size="15"> - Sampling Unit ID</font></td></tr>
        <tr><td align="left"><font point-size="15"><b> - Village Names</b></font></td></tr>
        <tr><td align="left"><font point-size="15"><b> - Town Names</b></font></td></tr>
+<tr><td align="left"><font point-size="15"> - Admin Levels</font></td></tr>
 <tr><td align="left"> </td></tr>
 <tr><td align="left"> </td></tr>
 <tr><td align="left"> </td></tr>
@@ -217,6 +215,7 @@ node [shape = rectangle, fontsize = "22", style = filled, fillcolor = Linen, fon
        <tr><td align="left"><font point-size="15"> n = 640,000</font></td></tr>
        <tr><td align="left"><font point-size="15"><b> - Village Names</b></font></td></tr>
        <tr><td align="left"><font point-size="15" color = "black"> - Latitude and Longitude</font></td></tr>
+<tr><td align="left"><font point-size="15"> - Admin Levels</font></td></tr>
        <tr><td align="left"> </td></tr>
      </table>>, shape = cylinder, fillcolor = lightsteelblue1]
 
@@ -226,6 +225,7 @@ node [shape = rectangle, fontsize = "22", style = filled, fillcolor = Linen, fon
        <tr><td align="left"><font point-size="15"> n = 8,000</font></td></tr>
        <tr><td align="left"><font point-size="15"><b> - Town Names</b></font></td></tr>
        <tr><td align="left"><font point-size="15" color = "black"> - Latitude and Longitude</font></td></tr>
+<tr><td align="left"><font point-size="15"> - Admin Levels</font></td></tr>
        <tr><td align="left"> </td></tr>
      </table>>, shape = cylinder, fillcolor = lightsteelblue1]
 
@@ -256,9 +256,11 @@ node [shape = rectangle, fontsize = "22", style = filled, fillcolor = Linen, fon
    sample [ label=<
      <table border="0" cellborder="0" cellspacing="1">
        <tr><td align="left"><b>Sampling Units         </b></td></tr>
+<tr><td align="left"><font point-size="15"> n = 9,000</font></td></tr>
        <tr><td align="left"><font point-size="15"><b> - Sampling Unit ID</b></font></td></tr>
        <tr><td align="left"><font point-size="15"> - Village Names</font></td></tr>
        <tr><td align="left"><font point-size="15"> - Town Names</font></td></tr>
+<tr><td align="left"><font point-size="15"> - Admin Levels</font></td></tr>
 <tr><td align="left"> </td></tr>
 <tr><td align="left"> </td></tr>
 <tr><td align="left"> </td></tr>
@@ -273,6 +275,7 @@ node [shape = rectangle, fontsize = "22", style = filled, fillcolor = Linen, fon
 <tr><td align="left"><font point-size="15"> n = 640,000</font></td></tr>
        <tr><td align="left"><font point-size="15"> - Village Names</font></td></tr>
        <tr><td align="left"><font point-size="15" color = "black"><b> - Latitude and Longitude</b></font></td></tr>
+<tr><td align="left"><font point-size="15"> - Admin Levels</font></td></tr>
        <tr><td align="left"> </td></tr>
      </table>>, shape = cylinder, fillcolor = lightsteelblue1]
 
@@ -282,6 +285,7 @@ node [shape = rectangle, fontsize = "22", style = filled, fillcolor = Linen, fon
 <tr><td align="left"><font point-size="15"> n = 8,000</font></td></tr>
        <tr><td align="left"><font point-size="15"> - Town Names</font></td></tr>
        <tr><td align="left"><font point-size="15" color = "black"><b> - Latitude and Longitude</b></font></td></tr>
+<tr><td align="left"><font point-size="15"> - Admin Levels</font></td></tr>
        <tr><td align="left"> </td></tr>
      </table>>, shape = cylinder, fillcolor = lightsteelblue1]
 
@@ -340,7 +344,7 @@ Village/town name variable
 "MEGHANA"
 "(Maithong II/(Namphai II)"
   
-# maybe the same location?
+# the same location?
 "Kanakpur Pt. II (CT)"
 " Kanakpur Pt Ii"
 "Kanakpur Ii"
@@ -359,11 +363,11 @@ Compounding this problem, was that issues I described earlier were very prevalen
 ---
 name: precedent
 class: animated, fadeIn, faster
-exclude: true
-
-# What Precedent Existed?
+exclude: false
 
 .pull-left[
+
+# What Precedent Existed?
 
 **SQL Queries**
  - Standardize names (letter case)
@@ -378,8 +382,20 @@ exclude: true
 ```{r echo=FALSE, out.width=220, fig.align='center'}
 knitr::include_graphics("https://wiki.postgresql.org/images/thumb/a/a4/PostgreSQL_logo.3colors.svg/540px-PostgreSQL_logo.3colors.svg.png")
 ```
+<br>
+```{r echo=FALSE, out.width=150, fig.align='center'}
+knitr::include_graphics("https://www.osgeo.org/wp-content/uploads/postgis-logo-171x250.png")
+```
 
 ]
+
+???
+
+---
+name: rtitle
+class: title-slide, middle, animated, fadeIn, faster
+
+## How should we tackle this problem?
 
 ???
 
@@ -388,26 +404,25 @@ name: rtoolkit
 class: animated, fadeIn, faster
 
 .pull-left[
-# Toolkit in R
-
- - Cleaning, Processing, and Joins
-    - `dplyr`
-    - `stringr`
-    - `purrr`
- - Fuzzy Matching
-    - `stringdist`
- - Database Connections
+# R Packages
+ - Database Connection
     - `DBI`
     - `RPostgres`
-    - `dbplyr`
+ - Cleaning, Processing, and Joins
+    - `stringr`
+    - `dplyr`
+ - Fuzzy Matching
+    - `stringdist`
+ - Iteration
+    - `purrr`
 
 ]
 
 .pull-right[
 <br>
 ```{r echo=FALSE, out.width=140, fig.align='center'}
+knitr::include_graphics("img/stringr.svg") 
 knitr::include_graphics("img/dplyr.svg")   
-knitr::include_graphics("img/stringr.svg")  
 knitr::include_graphics("img/purrr.svg")  
 ```
 
@@ -449,7 +464,7 @@ Village and Town Names
 .pull-right[
 
 ```{r}
-my_data # a sample of village names
+my_data
 ```
 
 ]
@@ -457,6 +472,7 @@ my_data # a sample of village names
 
 ---
 name: rmpunct
+class: animated, fadeIn, faster
 
 # Remove Punctuation
 
@@ -476,6 +492,7 @@ my_data
 
 ---
 name: rmextraspaces 
+class: animated, fadeIn, faster
 
 # Remove White Space
 
@@ -496,6 +513,7 @@ str_replace_all(my_data$vilname, "[[:space:]]+", " ") doesnt remove leading spac
 
 ---
 name: tolower
+class: animated, fadeIn, faster
 
 # Convert to Lower Case
 
@@ -521,6 +539,7 @@ my_data #cleaned-ish!
 
 ---
 name: fncver
+class: animated, fadeIn, faster
 
 # Make a Function
 
@@ -559,54 +578,102 @@ class: title-slide, middle, animated, fadeIn, faster
 ???
 
 ---
-name: stringdistance
+name: fuzzymatch
 class: animated, fadeIn, faster
 
 # Fuzzy Matching
 
- - Finding an approximate match
- - String Distance
-   - a metric that measures the similarity/difference between two strings
-   - `stringdist` R package 
+*"finding an approximate match, not exact"*
 
+**String Distance**
+ - Metric that measures the asimilarity or difference between two strings
+ - Levenshtein Distance, Cosine Similarity, Jaro-Winkler, etc.
+ - Lower number -> better match
+ - [`stringdist`](https://github.com/markvanderloo/stringdist) R package 
 
-```{r}
+--
 
-stringdist::stringdist("donut", "doughnut", method = "osa")
-
-```
-
-
-```{r include=FALSE}
-x1 <- c("Kanakpur Pt. II (CT)", " Kanakpur Pt Ii", "Kanakpur Ii")
-x1clean <- tolower(str_replace_all(str_trim(
-str_remove_all(gsub("[[:punct:]]", "", x1),
-"[-|=|\\+]"), side = "both"
-), "\\s+", " "))
-x2 <- c("kanakpur")
-
-df <- tibble(
-  x1, x1clean, x2
-)
-```
-
-```{r include=FALSE}
-df
-
-mutate_stringdist <- function(x, a, b, method, rev = FALSE) {
-  var_name <- paste(method, enexpr(a), enexpr(b), sep = "_")
-  mutate(x, !!var_name := stringdist(a, b, method = method))
-}
-
-df %>%
-  mutate_stringdist(x1, x2, method = "jw") %>% 
-  mutate_stringdist(x1clean, x2, method = "jw") %>% 
-  arrange_at(vars(matches("jw")))
-
+```{r echo = FALSE, out.width=190, fig.align='left'}
+knitr::include_graphics("https://media.giphy.com/media/CgKFTMMFDESNW/giphy.gif")
 ```
 
 ---
-name: fuzzymatch
+name: stringdist
+class: animated, fadeIn, faster
+
+# String Distance
+
+```{r}
+# more donuts
+a <- "donut"
+b <- c("donut", "dounut", "doughnut", "tunod")
+```
+--
+```{r}
+stringdist(a, b, method = "lv") # Levenshtein Distance
+stringdist(a, b, method = "cos") # Cosine Similarity
+stringdist(a, b, method = "jw") # Jaro-Winkler
+```
+
+???
+
+
+---
+name: stringdistindia
+class: animated, fadeIn, faster
+
+# Village Names
+
+Compare `"kanakapur II"` to names in `c1` and `c1a`.
+
+```{r include=FALSE}
+c1 <- c("Kanakpur Pt. II (CT)", " Kanakpur Pt Ii", "Kanakpur Ii")
+  
+my_data2 <- tibble(
+  c1,
+  c1a = my_cleaner(c1),
+  c2 = c("kanakapur II")
+)
+
+mutate_stringdist <- function(x, a, b, method, rev = FALSE) {
+  A <- sym(a); B <- sym(b)
+  mutate(
+    x, !!paste(method, a, b, sep = "_") := 
+      stringdist(!!A, !!B, method = method, p = 0.2)
+    )
+}
+```
+
+```{r}
+my_data2
+```
+--
+
+```r
+mutate_stringdist <- function(x, a, b, method, rev = FALSE) {
+  A <- sym(a); B <- sym(b)
+  mutate(
+    x, !!paste(method, a, b, sep = "_") := 
+*      stringdist(!!A, !!B, method = method, p = 0.2)
+    )
+}
+```
+
+---
+name: stringdistindia
+class: animated, fadeIn, faster
+
+# Village Names
+```{r}
+my_data2_match <- my_data2 %>%
+  mutate_stringdist("c1", "c2", method = "jw") %>% 
+  mutate_stringdist("c1a", "c2", method = "jw") %>% 
+  arrange_at(vars(matches("jw")))
+```
+--
+```{r echo=FALSE}
+my_data2_match
+```
 
 ---
 name: purrr
@@ -614,47 +681,91 @@ class: animated, fadeIn, faster
 
 # Iteration
 
-Purrr
-Iterate across “blocks” 
-multiple matches, administrative boundaries,
+In each data source "block" by state, district, substrict:
+ - Compute string distance for village/town names using `stringdist()`  
+ - Filter metric by a match threshold `jw < 0.1`
 
+--
 
----
-name: useexist
-class: animated, fadeIn, faster
+```r
+# block no matches in village amenities table by admin levels
+vil_no_matches_list <- vil_no_matches %>% 
+  dplyr::group_split(state_code14, dist_code, subdist_code) 
 
-# Leverage Existing Solutions
-DBI, dbplyr, RPostgres
-Run SQL scripts for nearest-distance measurement
-Destination of tables were in PostgreSQL
+# same for sample units table
+srs_no_matches_list <-vil_no_matches %>% 
+  dplyr::group_split(state_code14, dist_code, subdist_code) 
 
-```{r echo=FALSE, out.width=200, fig.align='center', eval=FALSE}
-knitr::include_graphics("https://www.osgeo.org/wp-content/uploads/postgis-logo-171x250.png")
+#loop through each block, calculate string distance, filter based on string distance metric
+*purrr::map2(
+  vil_no_matches_list, 
+  srs_no_matches_list, 
+  function(...) my_stringdist(...) %>% filter(jw < 0.1) #wrapper function around `stringdist()`
+  ) 
 ```
 
+???
+36 states 
+655 districts
+5000 subdistricts
+
 ---
-name: results
+name: stringdistplot
 class: animated, fadeIn, faster
 
-# Results
-Just cleaning strings increased overall match rate by
-Fuzzy matching improved overall match rate by … and reduced manual review by …
-Iterating SQL scripts increased efficiency and reproducibility
-Reduced leftover manual matching
+# Output
+.pull-left50[
+ - After cleaning and fuzzy matching:
+   - Villages **~96%** match
+   - Towns: **~94%** match
+- Automation of SQL queries via `DBI`
+- Reduced manual matching!!!
+]
+
+
+.pull-right50[
+
+```{r, echo=FALSE, out.width=850, fig.align='center'}
+knitr::include_graphics("img/fuzzy_match_dplot.png")
+```
+
+]
+???
+still have to manually review 15,000 records but better than 42,000
 
 ---
 name: takeaway
 class: animated, fadeIn, faster
 
-# Lessons Learned
+# Closing Thoughts
+.pull-left[
+ - R is great at cleaning messy text
+- Prioritize comprehensive cleaning
+- Fuzzy matching is useful (w/caveats)
+- Leverage existing work
 
-Identify the problems
-Identify the potential tools
-Leverage existing solutions
-Understand
+]
 
+--
+.pull-right[
+```{r echo=FALSE}
+knitr::include_graphics("https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/code_hero_rstats.png")
+```
+.tiny[https://github.com/allisonhorst/stats-illustrations]
+]
 
 ---
 name: lastslide
+class: bottom, center, animated, fadeIn, faster
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-thanks
+# Thank you!
+<br>
+<h4><i class="fab fa-github fa-lg"></i> <i class="fab fa-twitter fa-lg"></i>.title-font[&nbsp;@eugejoh]</h4>
+
+.small[[Slides](https://github.com/eugejoh/datacleaning-brownbag)]
+
+<br>
+<br>
+<br>
+.tiny[Created via the R package [xaringan](https://github.com/yihui/xaringan)]

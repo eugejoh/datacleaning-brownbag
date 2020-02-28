@@ -51,16 +51,16 @@ class: animated, fadeIn, faster
     - Cleaning messy text  
     - Fuzzy matching  
     - Iteration  
-  - Lessons learned  
+  - Takeaways
 ]
 
 .pull-right[
 &lt;br&gt;
-&lt;img src="https://cdn.onlinewebfonts.com/svg/img_385487.png" width="120" style="display: block; margin: auto;" /&gt;
+&lt;img src="https://cdn.onlinewebfonts.com/svg/img_385487.png" width="100" style="display: block; margin: auto;" /&gt;
 &lt;br&gt;
-&lt;img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/R_logo.svg/724px-R_logo.svg.png" width="150px" style="display: block; margin: auto;" /&gt;
+&lt;img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/R_logo.svg/724px-R_logo.svg.png" width="120px" style="display: block; margin: auto;" /&gt;
 &lt;br&gt;
-&lt;img src="https://www.traillink.com/images/tl/custom-icons/new-map-icon.svg" width="200px" style="display: block; margin: auto;" /&gt;
+&lt;img src="https://www.traillink.com/images/tl/custom-icons/new-map-icon.svg" width="170px" style="display: block; margin: auto;" /&gt;
 ]
 
 ???
@@ -77,9 +77,6 @@ class: animated, fadeIn, faster
 &lt;/center&gt;
 
 ???
-Before I jump into it, I wanted to share this tweet I found hilarious and a bit sad – there’s a paper reporting that 20% of all genomic data out there has errors attributed to the feature Excel has that auto-converts strings into a date format, essentially changing the content of that cell.
-
-I think this highlights the importance of data cleaning, and just an understanding that certain software we use regularly can throw in wrenches into the systems and workflows we have with data. I think events like this, that provide the space to share challenges and ideas like this brown bag are really great.
 
 ---
 name: globalhealthtitle
@@ -185,14 +182,14 @@ class: animated, fadeIn, faster
 name: pic1
 class: animated, fadeIn, faster
 &lt;br&gt;
-<div id="htmlwidget-4a0dcd3adfe4cab84398" style="width:650px;height:500px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-4a0dcd3adfe4cab84398">{"x":{"diagram":"digraph {\ngraph [rankdir = LR]\nnode [shape = rectangle, fontsize = \"22\", style = filled, fillcolor = Linen, fontname = \"Arial\", shape = \"tab\" fontcolor = \"gray10\"]\n\n   sample [ label=<\n     <table border=\"0\" cellborder=\"0\" cellspacing=\"1\">\n       <tr><td align=\"left\"><b>Sampling Units         <\/b><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"> n = 9,000<\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"> - Sampling Unit ID<\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"><b> - Village Names<\/b><\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"><b> - Town Names<\/b><\/font><\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n     <\/table>>]\n\n   vill [ label=<\n     <table border=\"0\" cellborder=\"0\" cellspacing=\"1\">\n       <tr><td align=\"left\"><b>Village Amenities         <\/b><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"> n = 640,000<\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"><b> - Village Names<\/b><\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\" color = \"black\"> - Latitude and Longitude<\/font><\/td><\/tr>\n       <tr><td align=\"left\"> <\/td><\/tr>\n     <\/table>>, shape = cylinder, fillcolor = lightsteelblue1]\n\n   twn [ label=<\n     <table border=\"0\" cellborder=\"0\" cellspacing=\"1\">\n       <tr><td align=\"left\"><b>Town Amenities         <\/b><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"> n = 8,000<\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"><b> - Town Names<\/b><\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\" color = \"black\"> - Latitude and Longitude<\/font><\/td><\/tr>\n       <tr><td align=\"left\"> <\/td><\/tr>\n     <\/table>>, shape = cylinder, fillcolor = lightsteelblue1]\n\nsample -> {vill twn} [arrowhead=none]\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-c3c414becde92765b8d9" style="width:650px;height:500px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c3c414becde92765b8d9">{"x":{"diagram":"digraph {\ngraph [rankdir = LR]\nnode [shape = rectangle, fontsize = \"22\", style = filled, fillcolor = Linen, fontname = \"Arial\", shape = \"tab\" fontcolor = \"gray10\"]\n\n   sample [ label=<\n     <table border=\"0\" cellborder=\"0\" cellspacing=\"1\">\n       <tr><td align=\"left\"><b>Sampling Units         <\/b><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"> n = 9,000<\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"> - Sampling Unit ID<\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"><b> - Village Names<\/b><\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"><b> - Town Names<\/b><\/font><\/td><\/tr>\n<tr><td align=\"left\"><font point-size=\"15\"> - Admin Levels<\/font><\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n     <\/table>>]\n\n   vill [ label=<\n     <table border=\"0\" cellborder=\"0\" cellspacing=\"1\">\n       <tr><td align=\"left\"><b>Village Amenities         <\/b><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"> n = 640,000<\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"><b> - Village Names<\/b><\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\" color = \"black\"> - Latitude and Longitude<\/font><\/td><\/tr>\n<tr><td align=\"left\"><font point-size=\"15\"> - Admin Levels<\/font><\/td><\/tr>\n       <tr><td align=\"left\"> <\/td><\/tr>\n     <\/table>>, shape = cylinder, fillcolor = lightsteelblue1]\n\n   twn [ label=<\n     <table border=\"0\" cellborder=\"0\" cellspacing=\"1\">\n       <tr><td align=\"left\"><b>Town Amenities         <\/b><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"> n = 8,000<\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"><b> - Town Names<\/b><\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\" color = \"black\"> - Latitude and Longitude<\/font><\/td><\/tr>\n<tr><td align=\"left\"><font point-size=\"15\"> - Admin Levels<\/font><\/td><\/tr>\n       <tr><td align=\"left\"> <\/td><\/tr>\n     <\/table>>, shape = cylinder, fillcolor = lightsteelblue1]\n\nsample -> {vill twn} [arrowhead=none]\n\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 
 ---
 name: pic2
 class: animated, fadeIn, faster
-<div id="htmlwidget-49b869a56fbb3bab7b34" style="width:1000px;height:500px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-49b869a56fbb3bab7b34">{"x":{"diagram":"digraph {\ngraph [rankdir = LR]\nnode [shape = rectangle, fontsize = \"22\", style = filled, fillcolor = Linen, fontname = \"Arial\", shape = \"tab\" fontcolor = \"gray10\"]\n\n  # survey [ label=<\n  #  <table border=\"0\" cellborder=\"0\" cellspacing=\"1\">\n  #    <tr><td align=\"left\"><b>Survey Forms         <\/b><\/td><\/tr>\n  #    <tr><td align=\"left\"><font point-size=\"15\"><b> - Sampling Unit ID<\/b><\/font><\/td><\/tr>\n  #    <tr><td align=\"left\"><font point-size=\"15\"> - Household Information<\/font><\/td><\/tr>\n  #    <tr><td align=\"left\"><font point-size=\"15\"> - Village Names<\/font><\/td><\/tr>\n  #    <tr><td align=\"left\"><font point-size=\"15\"> - Town Names<\/font><\/td><\/tr>\n  #    <tr><td align=\"left\"> <\/td><\/tr>\n  #    <tr><td align=\"left\"> <\/td><\/tr>\n  # <\/table>>]\n\n   sample [ label=<\n     <table border=\"0\" cellborder=\"0\" cellspacing=\"1\">\n       <tr><td align=\"left\"><b>Sampling Units         <\/b><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"><b> - Sampling Unit ID<\/b><\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"> - Village Names<\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"> - Town Names<\/font><\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n     <\/table>>]\n\n   vill [ label=<\n     <table border=\"0\" cellborder=\"0\" cellspacing=\"1\">\n       <tr><td align=\"left\"><b>Village Amenities         <\/b><\/td><\/tr>\n<tr><td align=\"left\"><font point-size=\"15\"> n = 640,000<\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"> - Village Names<\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\" color = \"black\"><b> - Latitude and Longitude<\/b><\/font><\/td><\/tr>\n       <tr><td align=\"left\"> <\/td><\/tr>\n     <\/table>>, shape = cylinder, fillcolor = lightsteelblue1]\n\n   twn [ label=<\n     <table border=\"0\" cellborder=\"0\" cellspacing=\"1\">\n       <tr><td align=\"left\"><b>Town Amenities         <\/b><\/td><\/tr>\n<tr><td align=\"left\"><font point-size=\"15\"> n = 8,000<\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"> - Town Names<\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\" color = \"black\"><b> - Latitude and Longitude<\/b><\/font><\/td><\/tr>\n       <tr><td align=\"left\"> <\/td><\/tr>\n     <\/table>>, shape = cylinder, fillcolor = lightsteelblue1]\n\n   out [ label=<\n     <table border=\"0\" cellborder=\"0\" cellspacing=\"1\">\n       <tr><td align=\"left\"><b>Desired Output         <\/b><\/td><\/tr>\n<tr><td align=\"left\"><font point-size=\"15\"> n = ??? <\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"> - <b>Sampling Unit ID<\/b><\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\" color = \"black\"> - <b>Latitude and Longitude<\/b><\/font><\/td><\/tr>\n       <tr><td align=\"left\"> <\/td><\/tr>\n     <\/table>>, shape = cylinder, fillcolor = skyblue2]\n\n# survey -> sample \nsample -> {vill twn} [arrowhead=none]\n{sample vill twn} -> out\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-ac7c52c13583f7a3c6ba" style="width:1000px;height:500px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ac7c52c13583f7a3c6ba">{"x":{"diagram":"digraph {\ngraph [rankdir = LR]\nnode [shape = rectangle, fontsize = \"22\", style = filled, fillcolor = Linen, fontname = \"Arial\", shape = \"tab\" fontcolor = \"gray10\"]\n\n  # survey [ label=<\n  #  <table border=\"0\" cellborder=\"0\" cellspacing=\"1\">\n  #    <tr><td align=\"left\"><b>Survey Forms         <\/b><\/td><\/tr>\n  #    <tr><td align=\"left\"><font point-size=\"15\"><b> - Sampling Unit ID<\/b><\/font><\/td><\/tr>\n  #    <tr><td align=\"left\"><font point-size=\"15\"> - Household Information<\/font><\/td><\/tr>\n  #    <tr><td align=\"left\"><font point-size=\"15\"> - Village Names<\/font><\/td><\/tr>\n  #    <tr><td align=\"left\"><font point-size=\"15\"> - Town Names<\/font><\/td><\/tr>\n  #    <tr><td align=\"left\"> <\/td><\/tr>\n  #    <tr><td align=\"left\"> <\/td><\/tr>\n  # <\/table>>]\n\n   sample [ label=<\n     <table border=\"0\" cellborder=\"0\" cellspacing=\"1\">\n       <tr><td align=\"left\"><b>Sampling Units         <\/b><\/td><\/tr>\n<tr><td align=\"left\"><font point-size=\"15\"> n = 9,000<\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"><b> - Sampling Unit ID<\/b><\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"> - Village Names<\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"> - Town Names<\/font><\/td><\/tr>\n<tr><td align=\"left\"><font point-size=\"15\"> - Admin Levels<\/font><\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n<tr><td align=\"left\"> <\/td><\/tr>\n     <\/table>>]\n\n   vill [ label=<\n     <table border=\"0\" cellborder=\"0\" cellspacing=\"1\">\n       <tr><td align=\"left\"><b>Village Amenities         <\/b><\/td><\/tr>\n<tr><td align=\"left\"><font point-size=\"15\"> n = 640,000<\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"> - Village Names<\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\" color = \"black\"><b> - Latitude and Longitude<\/b><\/font><\/td><\/tr>\n<tr><td align=\"left\"><font point-size=\"15\"> - Admin Levels<\/font><\/td><\/tr>\n       <tr><td align=\"left\"> <\/td><\/tr>\n     <\/table>>, shape = cylinder, fillcolor = lightsteelblue1]\n\n   twn [ label=<\n     <table border=\"0\" cellborder=\"0\" cellspacing=\"1\">\n       <tr><td align=\"left\"><b>Town Amenities         <\/b><\/td><\/tr>\n<tr><td align=\"left\"><font point-size=\"15\"> n = 8,000<\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"> - Town Names<\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\" color = \"black\"><b> - Latitude and Longitude<\/b><\/font><\/td><\/tr>\n<tr><td align=\"left\"><font point-size=\"15\"> - Admin Levels<\/font><\/td><\/tr>\n       <tr><td align=\"left\"> <\/td><\/tr>\n     <\/table>>, shape = cylinder, fillcolor = lightsteelblue1]\n\n   out [ label=<\n     <table border=\"0\" cellborder=\"0\" cellspacing=\"1\">\n       <tr><td align=\"left\"><b>Desired Output         <\/b><\/td><\/tr>\n<tr><td align=\"left\"><font point-size=\"15\"> n = ??? <\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\"> - <b>Sampling Unit ID<\/b><\/font><\/td><\/tr>\n       <tr><td align=\"left\"><font point-size=\"15\" color = \"black\"> - <b>Latitude and Longitude<\/b><\/font><\/td><\/tr>\n       <tr><td align=\"left\"> <\/td><\/tr>\n     <\/table>>, shape = cylinder, fillcolor = skyblue2]\n\n# survey -> sample \nsample -> {vill twn} [arrowhead=none]\n{sample vill twn} -> out\n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 
 ???
 villages - 640948
@@ -235,7 +232,7 @@ Village/town name variable
 "MEGHANA"
 "(Maithong II/(Namphai II)"
   
-# maybe the same location?
+# the same location?
 "Kanakpur Pt. II (CT)"
 " Kanakpur Pt Ii"
 "Kanakpur Ii"
@@ -254,11 +251,11 @@ Compounding this problem, was that issues I described earlier were very prevalen
 ---
 name: precedent
 class: animated, fadeIn, faster
-exclude: true
-
-# What Precedent Existed?
+exclude: false
 
 .pull-left[
+
+# What Precedent Existed?
 
 **SQL Queries**
  - Standardize names (letter case)
@@ -271,8 +268,18 @@ exclude: true
 .pull-right[
 &lt;br&gt;
 &lt;img src="https://wiki.postgresql.org/images/thumb/a/a4/PostgreSQL_logo.3colors.svg/540px-PostgreSQL_logo.3colors.svg.png" width="220" style="display: block; margin: auto;" /&gt;
+&lt;br&gt;
+&lt;img src="https://www.osgeo.org/wp-content/uploads/postgis-logo-171x250.png" width="150" style="display: block; margin: auto;" /&gt;
 
 ]
+
+???
+
+---
+name: rtitle
+class: title-slide, middle, animated, fadeIn, faster
+
+## How should we tackle this problem?
 
 ???
 
@@ -281,24 +288,23 @@ name: rtoolkit
 class: animated, fadeIn, faster
 
 .pull-left[
-# Toolkit in R
-
- - Cleaning, Processing, and Joins
-    - `dplyr`
-    - `stringr`
-    - `purrr`
- - Fuzzy Matching
-    - `stringdist`
- - Database Connections
+# R Packages
+ - Database Connection
     - `DBI`
     - `RPostgres`
-    - `dbplyr`
+ - Cleaning, Processing, and Joins
+    - `stringr`
+    - `dplyr`
+ - Fuzzy Matching
+    - `stringdist`
+ - Iteration
+    - `purrr`
 
 ]
 
 .pull-right[
 &lt;br&gt;
-&lt;img src="img/dplyr.svg" width="140" style="display: block; margin: auto;" /&gt;&lt;img src="img/stringr.svg" width="140" style="display: block; margin: auto;" /&gt;&lt;img src="img/purrr.svg" width="140" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/stringr.svg" width="140" style="display: block; margin: auto;" /&gt;&lt;img src="img/dplyr.svg" width="140" style="display: block; margin: auto;" /&gt;&lt;img src="img/purrr.svg" width="140" style="display: block; margin: auto;" /&gt;
 
 ]
 
@@ -325,7 +331,7 @@ Village and Town Names
 
 
 ```r
-my_data # a sample of village names
+my_data
 ```
 
 ```
@@ -345,6 +351,7 @@ my_data # a sample of village names
 
 ---
 name: rmpunct
+class: animated, fadeIn, faster
 
 # Remove Punctuation
 
@@ -374,6 +381,7 @@ my_data$vilname &lt;- str_replace_all(my_data$vilname, "[[:punct:]]+", "")
 
 ---
 name: rmextraspaces 
+class: animated, fadeIn, faster
 
 # Remove White Space
 
@@ -404,6 +412,7 @@ str_replace_all(my_data$vilname, "[[:space:]]+", " ") doesnt remove leading spac
 
 ---
 name: tolower
+class: animated, fadeIn, faster
 
 # Convert to Lower Case
 
@@ -456,6 +465,7 @@ my_data #cleaned-ish!
 
 ---
 name: fncver
+class: animated, fadeIn, faster
 
 # Make a Function
 
@@ -503,59 +513,126 @@ my_data %&gt;%
 name: titlestringdist
 class: title-slide, middle, animated, fadeIn, faster
 
-### ...but can we really use this 'cleaned' variable?
+## ...but can we really use this 'cleaned' variable?
 
 ???
 
 ---
-name: stringdistance
+name: fuzzymatch
 class: animated, fadeIn, faster
 
 # Fuzzy Matching
 
- - Finding an approximate match
- - String distance:
-   - metric that measures the similarity or distance between two text strings
+*"finding an approximate match, not exact"*
+
+**String Distance**
+ - Metric that measures the asimilarity or difference between two strings
+ - Levenshtein Distance, Cosine Similarity, Jaro-Winkler, etc.
+ - Lower number -&gt; better match
+ - [`stringdist`](https://github.com/markvanderloo/stringdist) R package 
+
+--
+
+&lt;img src="https://media.giphy.com/media/CgKFTMMFDESNW/giphy.gif" width="190" style="display: block; margin: auto auto auto 0;" /&gt;
+
+---
+name: stringdist
+class: animated, fadeIn, faster
+
+# String Distance
+
+
+```r
+# more donuts
+a &lt;- "donut"
+b &lt;- c("donut", "dounut", "doughnut", "tunod")
+```
+--
+
+```r
+stringdist(a, b, method = "lv") # Levenshtein Distance
+```
+
+```
+## [1] 0 1 3 4
+```
+
+```r
+stringdist(a, b, method = "cos") # Cosine Similarity
+```
+
+```
+## [1] 0.0000000 0.0513167 0.1514719 0.0000000
+```
+
+```r
+stringdist(a, b, method = "jw") # Jaro-Winkler
+```
+
+```
+## [1] 0.0000000 0.1222222 0.1916667 0.5333333
+```
+
+???
+
+
+---
+name: stringdistindia
+class: animated, fadeIn, faster
+
+# Village Names
+
+Compare `"kanakapur II"` to names in `c1` and `c1a`.
 
 
 
 
 ```r
-df
+my_data2
 ```
 
 ```
 ## # A tibble: 3 x 3
-##   x1                   x1clean           x2      
-##   &lt;chr&gt;                &lt;chr&gt;             &lt;chr&gt;   
-## 1 Kanakpur Pt. II (CT) kanakpur pt ii ct kanakpur
-## 2 " Kanakpur Pt Ii"    kanakpur pt ii    kanakpur
-## 3 Kanakpur Ii          kanakpur ii       kanakpur
+##   c1                   c1a               c2          
+##   &lt;chr&gt;                &lt;chr&gt;             &lt;chr&gt;       
+## 1 Kanakpur Pt. II (CT) kanakpur pt ii ct kanakapur II
+## 2 " Kanakpur Pt Ii"    kanakpur pt ii    kanakapur II
+## 3 Kanakpur Ii          kanakpur ii       kanakapur II
 ```
+--
 
 ```r
 mutate_stringdist &lt;- function(x, a, b, method, rev = FALSE) {
-  var_name &lt;- paste(method, enexpr(a), enexpr(b), sep = "_")
-  mutate(x, !!var_name := stringdist(a, b, method = method))
+  A &lt;- sym(a); B &lt;- sym(b)
+  mutate(
+    x, !!paste(method, a, b, sep = "_") := 
+*      stringdist(!!A, !!B, method = method, p = 0.2)
+    )
 }
-
-df %&gt;%
-  mutate_stringdist(x1, x2, method = "jw") %&gt;% 
-  mutate_stringdist(x1clean, x2, method = "jw") %&gt;% 
-  arrange_at(vars(matches("jw")))
-```
-
-```
-## # A tibble: 3 x 5
-##   x1                   x1clean           x2       jw_x1_x2 jw_x1clean_x2
-##   &lt;chr&gt;                &lt;chr&gt;             &lt;chr&gt;       &lt;dbl&gt;         &lt;dbl&gt;
-## 1 Kanakpur Ii          kanakpur ii       kanakpur    0.258        0.0909
-## 2 " Kanakpur Pt Ii"    kanakpur pt ii    kanakpur    0.315        0.143 
-## 3 Kanakpur Pt. II (CT) kanakpur pt ii ct kanakpur    0.354        0.176
 ```
 
 ---
-name: fuzzymatch
+name: stringdistindia
+class: animated, fadeIn, faster
+
+# Village Names
+
+```r
+my_data2_match &lt;- my_data2 %&gt;%
+  mutate_stringdist("c1", "c2", method = "jw") %&gt;% 
+  mutate_stringdist("c1a", "c2", method = "jw") %&gt;% 
+  arrange_at(vars(matches("jw")))
+```
+--
+
+```
+## # A tibble: 3 x 5
+##   c1                   c1a               c2           jw_c1_c2 jw_c1a_c2
+##   &lt;chr&gt;                &lt;chr&gt;             &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;
+## 1 Kanakpur Ii          kanakpur ii       kanakapur II    0.218    0.0288
+## 2 Kanakpur Pt. II (CT) kanakpur pt ii ct kanakapur II    0.289    0.0480
+## 3 " Kanakpur Pt Ii"    kanakpur pt ii    kanakapur II    0.291    0.0405
+```
 
 ---
 name: purrr
@@ -563,48 +640,90 @@ class: animated, fadeIn, faster
 
 # Iteration
 
-Purrr
-Iterate across “blocks” 
-multiple matches, administrative boundaries,
+In each data source "block" by state, district, substrict:
+ - Compute string distance for village/town names using `stringdist()`  
+ - Filter metric by a match threshold `jw &lt; 0.1`
 
+--
+
+```r
+# block no matches in village amenities table by admin levels
+vil_no_matches_list &lt;- vil_no_matches %&gt;% 
+  dplyr::group_split(state_code14, dist_code, subdist_code) 
+
+# same for sample units table
+srs_no_matches_list &lt;-vil_no_matches %&gt;% 
+  dplyr::group_split(state_code14, dist_code, subdist_code) 
+
+#loop through each block, calculate string distance, filter based on string distance metric
+*purrr::map2(
+  vil_no_matches_list, 
+  srs_no_matches_list, 
+  function(...) my_stringdist(...) %&gt;% filter(jw &lt; 0.1) #wrapper function around `stringdist()`
+  ) 
+```
+
+???
+36 states 
+655 districts
+5000 subdistricts
 
 ---
-name: useexist
+name: stringdistplot
 class: animated, fadeIn, faster
 
-# Leverage Existing Solutions
-DBI, dbplyr, RPostgres
-Run SQL scripts for nearest-distance measurement
-Destination of tables were in PostgreSQL
+# Output
+.pull-left50[
+ - After cleaning and fuzzy matching:
+   - Villages **~96%** match
+   - Towns: **~94%** match
+- Automation of SQL queries via `DBI`
+- Reduced manual matching!!!
+]
 
 
+.pull-right50[
 
----
-name: results
-class: animated, fadeIn, faster
+&lt;img src="img/fuzzy_match_dplot.png" width="850" style="display: block; margin: auto;" /&gt;
 
-# Results
-Just cleaning strings increased overall match rate by
-Fuzzy matching improved overall match rate by … and reduced manual review by …
-Iterating SQL scripts increased efficiency and reproducibility
-Reduced leftover manual matching
+]
+???
+still have to manually review 15,000 records but better than 42,000
 
 ---
 name: takeaway
 class: animated, fadeIn, faster
 
-# Lessons Learned
+# Closing Thoughts
+.pull-left[
+ - R is great at cleaning messy text
+- Prioritize comprehensive cleaning
+- Fuzzy matching is useful (w/caveats)
+- Leverage existing work
 
-Identify the problems
-Identify the potential tools
-Leverage existing solutions
-Understand
+]
 
+--
+.pull-right[
+![](https://github.com/allisonhorst/stats-illustrations/raw/master/rstats-artwork/code_hero_rstats.png)&lt;!-- --&gt;
+.tiny[https://github.com/allisonhorst/stats-illustrations]
+]
 
 ---
 name: lastslide
+class: bottom, center, animated, fadeIn, faster
+&lt;link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"&gt;
 
-thanks
+# Thank you!
+&lt;br&gt;
+&lt;h4&gt;&lt;i class="fab fa-github fa-lg"&gt;&lt;/i&gt; &lt;i class="fab fa-twitter fa-lg"&gt;&lt;/i&gt;.title-font[&amp;nbsp;@eugejoh]&lt;/h4&gt;
+
+.small[[Slides](https://github.com/eugejoh/datacleaning-brownbag)]
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+.tiny[Created via the R package [xaringan](https://github.com/yihui/xaringan)]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
@@ -612,7 +731,7 @@ thanks
 <script>var slideshow = remark.create({
 "highlightStyle": "github",
 "highlightLines": true,
-"highlightSpans": false,
+"highlightSpans": true,
 "ratio": "16:9",
 "countIncrementalSlides": true,
 "slideNumberFormat": "%current%/%total%"
