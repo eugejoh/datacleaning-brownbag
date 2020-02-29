@@ -693,7 +693,7 @@ vil_no_matches_list <- vil_no_matches %>%
   dplyr::group_split(state_code14, dist_code, subdist_code) 
 
 # same for sample units table
-srs_no_matches_list <-vil_no_matches %>% 
+srs_no_matches_list <- srs_no_matches %>% 
   dplyr::group_split(state_code14, dist_code, subdist_code) 
 
 #loop through each block, calculate string distance, filter based on string distance metric
